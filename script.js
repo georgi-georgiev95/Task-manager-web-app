@@ -52,29 +52,29 @@ function resetCounter() {
     completedTasks.textContent = `Completed tasks: ${counter}`;
 }
 
+// ...
+
 function displayTasks() {
     taskList.innerHTML = "";
     tasks.forEach((taskObj, index) => {
-        const { task, taskTime, done } = taskObj;
+        const { task, taskTime, done, timerInterval } = taskObj;
+
         const li = document.createElement("li");
 
         if (done) {
             li.classList.add("done");
         }
-        
-        
+
         const taskText = document.createElement("span");
         taskText.textContent = `${task} (scheduled for ${taskTime})`;
         li.appendChild(taskText);
 
-        //adding timer
         const timerElement = document.createElement("p");
         timerElement.id = 'timer';
-        let [hours, minutes] = taskTime.split(':').map(Number);
-        
-        li.appendChild(timerElement)
+        li.appendChild(timerElement);
 
-        let x = setInterval(function () {
+        // Define a function to update the timer
+        function updateTimer() {
             let date = new Date();
             let day = date.getDate();
             let month = date.getMonth();
@@ -89,15 +89,22 @@ function displayTasks() {
             timerElement.innerHTML = timerHours + "h " + timerMinutes + "m " + timerSeconds + "s ";
 
             if (distance < 0) {
-                clearInterval(x);
+                clearInterval(timerInterval); // Clear the interval
                 timerElement.innerHTML = "It's time! Hurry up!";
                 li.classList.add("flash-red");
             } else {
                 li.classList.remove("flash-red");
             }
-        }, 1000);
-        
-        //endOfTimer
+        }
+
+        // Check if there's an existing interval and clear it
+        if (timerInterval) {
+            clearInterval(timerInterval);
+        }
+
+        // Initialize the timer interval
+        const [hours, minutes] = taskTime.split(':').map(Number);
+        taskObj.timerInterval = setInterval(updateTimer, 1000);
 
         const markButton = document.createElement("button");
         markButton.textContent = done ? "Undo" : "Done";
@@ -107,10 +114,13 @@ function displayTasks() {
 
         function toggleTaskStatus(index) {
             tasks[index].done = !tasks[index].done;
-            displayTasks();
+
             if (tasks[index].done) {
+                clearInterval(taskObj.timerInterval); // Clear the interval when the task is marked as "Done"
                 counter++;
             }
+
+            displayTasks();
             completedTasks.textContent = `Completed tasks: ${counter}`;
             localStorage.setItem("tasks", JSON.stringify(tasks));
         }
@@ -125,10 +135,10 @@ function displayTasks() {
         function deleteTask(index) {
             tasks.splice(index, 1);
             displayTasks();
-
             localStorage.setItem("tasks", JSON.stringify(tasks));
         }
     });
 }
+
 
 
