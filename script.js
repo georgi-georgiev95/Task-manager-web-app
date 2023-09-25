@@ -52,7 +52,6 @@ function resetCounter() {
     completedTasks.textContent = `Completed tasks: ${counter}`;
 }
 
-
 function displayTasks() {
     taskList.innerHTML = "";
     tasks.forEach((taskObj, index) => {
@@ -72,7 +71,6 @@ function displayTasks() {
         timerElement.id = 'timer';
         li.appendChild(timerElement);
 
-        
         function updateTimer() {
             let date = new Date();
             let day = date.getDate();
@@ -88,20 +86,20 @@ function displayTasks() {
             timerElement.innerHTML = timerHours + "h " + timerMinutes + "m " + timerSeconds + "s ";
 
             if (distance < 0) {
-                clearInterval(timerInterval); 
+                clearInterval(taskObj.timerInterval);
                 timerElement.innerHTML = "It's time! Hurry up!";
-                li.classList.add("flash-red");
+                if (!done) { 
+                    li.classList.add("flash-red");
+                }
             } else {
                 li.classList.remove("flash-red");
             }
         }
 
-        
         if (timerInterval) {
             clearInterval(timerInterval);
         }
 
-        
         const [hours, minutes] = taskTime.split(':').map(Number);
         taskObj.timerInterval = setInterval(updateTimer, 1000);
 
@@ -115,8 +113,9 @@ function displayTasks() {
             tasks[index].done = !tasks[index].done;
 
             if (tasks[index].done) {
-                clearInterval(taskObj.timerInterval);
+                clearInterval(taskObj.timerInterval); 
                 counter++;
+                li.classList.remove("flash-red"); 
             }
 
             displayTasks();
@@ -138,6 +137,3 @@ function displayTasks() {
         }
     });
 }
-
-
-
