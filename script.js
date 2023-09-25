@@ -1,3 +1,8 @@
+document.querySelector('#redirectToTaskManager').addEventListener('click', function () {
+    document.querySelector('div.typewriter').style.display = 'none';
+    document.querySelector('main').style.display = 'block';
+})
+
 window.addEventListener("DOMContentLoaded", () => {
     const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
@@ -88,7 +93,7 @@ function displayTasks() {
             if (distance < 0) {
                 clearInterval(taskObj.timerInterval);
                 timerElement.innerHTML = "It's time! Hurry up!";
-                if (!done) { 
+                if (!done) {
                     li.classList.add("flash-red");
                 }
             } else {
@@ -113,9 +118,9 @@ function displayTasks() {
             tasks[index].done = !tasks[index].done;
 
             if (tasks[index].done) {
-                clearInterval(taskObj.timerInterval); 
+                clearInterval(taskObj.timerInterval);
                 counter++;
-                li.classList.remove("flash-red"); 
+                li.classList.remove("flash-red");
             }
 
             displayTasks();

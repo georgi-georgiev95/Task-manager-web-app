@@ -2,10 +2,68 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    background-image: url('./images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 h1 {
+    color: whitesmoke;
+}
+
+main {
+    display: none;
+}
+
+#redirectToTaskManager {
+    padding: 1em;
+    margin: 2rem;
+}
+
+h1 {
+    width: max-content;
+}
+
+.typewriter,
+.homepage {
     text-align: center;
+}
+
+.typewriter h1 {
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation:
+        typing 1s steps(40, end),
+        blink-caret .75s step-end 1;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 17%
+    }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: orange;
+    }
 }
 
 .input-container {
@@ -19,7 +77,8 @@ h1 {
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.input-container input[type="text"], input[type="time"] {
+.input-container input[type="text"],
+input[type="time"] {
     width: 300px;
     padding: 10px;
     border: none;
@@ -42,6 +101,8 @@ h1 {
 
 .input-container button:hover {
     background-color: #45a049;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 input[type="text"] {
@@ -96,13 +157,18 @@ button.delete-button:hover {
 }
 
 #completed-tasks {
-    margin: 3rem;
+    margin: 2rem;
     display: inline;
 }
 
 #completed-area {
-    margin: 3rem;
+    margin: 0 auto;
     text-align: center;
+    background-color: white;
+    padding: 1em;
+    width: max-content;
+    border-radius: 3rem;
+
 }
 
 .flash-red {
@@ -111,10 +177,25 @@ button.delete-button:hover {
 
 @keyframes flash {
     from {
-        background-color: #f0f0f0;
+        background-color: white;
     }
 
     to {
         background-color: red;
+    }
+}
+
+.done {
+    background-color: #d2f5d2;
+    animation: fade-in 0.5s ease;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }

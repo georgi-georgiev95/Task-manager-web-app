@@ -9,16 +9,24 @@
 </head>
 
 <body>
-    <h1>Task Manager</h1>
-
-    <div class="input-container">
-        <input type="text" id="taskInput" placeholder="Enter task">
-        <input type="time" id="taskTimeInput" placeholder="Enter task time">
-        <button id="addTaskButton">Add Task</button>
+    <div class="typewriter">
+        <h1>Welcome to Task Manager</h1>
+        <button id="redirectToTaskManager">Go to Task Manager</button>
     </div>
 
-    <ul id="taskList"></ul>
-    
+    <main>
+        <div class="typewriter">
+            <h1>Task Manager</h1>
+        </div>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Enter task">
+            <input type="time" id="taskTimeInput" placeholder="Enter task time">
+            <button id="addTaskButton">Add Task</button>
+        </div>
+
+        <ul id="taskList"></ul>
+    </main>
+
     <script src="script.js"></script>
 </body>
 
