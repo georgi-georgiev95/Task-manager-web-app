@@ -52,7 +52,6 @@ function resetCounter() {
     completedTasks.textContent = `Completed tasks: ${counter}`;
 }
 
-// ...
 
 function displayTasks() {
     taskList.innerHTML = "";
@@ -73,7 +72,7 @@ function displayTasks() {
         timerElement.id = 'timer';
         li.appendChild(timerElement);
 
-        // Define a function to update the timer
+        
         function updateTimer() {
             let date = new Date();
             let day = date.getDate();
@@ -89,7 +88,7 @@ function displayTasks() {
             timerElement.innerHTML = timerHours + "h " + timerMinutes + "m " + timerSeconds + "s ";
 
             if (distance < 0) {
-                clearInterval(timerInterval); // Clear the interval
+                clearInterval(timerInterval); 
                 timerElement.innerHTML = "It's time! Hurry up!";
                 li.classList.add("flash-red");
             } else {
@@ -97,12 +96,12 @@ function displayTasks() {
             }
         }
 
-        // Check if there's an existing interval and clear it
+        
         if (timerInterval) {
             clearInterval(timerInterval);
         }
 
-        // Initialize the timer interval
+        
         const [hours, minutes] = taskTime.split(':').map(Number);
         taskObj.timerInterval = setInterval(updateTimer, 1000);
 
@@ -116,7 +115,7 @@ function displayTasks() {
             tasks[index].done = !tasks[index].done;
 
             if (tasks[index].done) {
-                clearInterval(taskObj.timerInterval); // Clear the interval when the task is marked as "Done"
+                clearInterval(taskObj.timerInterval);
                 counter++;
             }
 
