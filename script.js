@@ -69,8 +69,10 @@ function displayTasks() {
 
         //adding timer
         const timerElement = document.createElement("p");
+        timerElement.id = 'timer';
         let [hours, minutes] = taskTime.split(':').map(Number);
         
+        li.appendChild(timerElement)
 
         let x = setInterval(function () {
             let date = new Date();
@@ -78,7 +80,7 @@ function displayTasks() {
             let month = date.getMonth();
             let currentYear = date.getFullYear();
             let countDownTo = new Date(`${month + 1} ${day}, ${currentYear} ${hours}:${minutes}:00`);
-            
+
             let now = date.getTime();
             let distance = countDownTo - now;
             let timerHours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -89,10 +91,12 @@ function displayTasks() {
             if (distance < 0) {
                 clearInterval(x);
                 timerElement.innerHTML = "It's time! Hurry up!";
+                li.classList.add("flash-red");
+            } else {
+                li.classList.remove("flash-red");
             }
         }, 1000);
-         
-        li.appendChild(timerElement)
+        
         //endOfTimer
 
         const markButton = document.createElement("button");

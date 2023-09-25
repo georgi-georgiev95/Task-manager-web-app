@@ -105,3 +105,16 @@ button.delete-button:hover {
     text-align: center;
 }
 
+.flash-red {
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    from {
+        background-color: #f0f0f0;
+    }
+
+    to {
+        background-color: red;
+    }
+}
